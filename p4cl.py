@@ -5,7 +5,7 @@ import p4lib
 
 def changeHeader(details):
     summary = changeSummary(details['description'])
-    return "%s|CL:%s (%s) - %s" % (details['date'], details['change'], details['user'], summary) 
+    return "[%s|CL:%s (%s)] - %s" % (details['date'], details['change'], details['user'], summary) 
 
 def changeSummary(description):
     summary = description
@@ -60,6 +60,7 @@ def main():
         print changeHeader(details)
         if includeFiles:
             print changedFileList(details['files'], fileFilters)
+            print ""
 
 if __name__ == '__main__':
     main()
