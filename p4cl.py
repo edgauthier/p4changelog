@@ -2,6 +2,7 @@
 
 import sys
 import p4lib
+import getopt
 
 def changeHeader(details):
     summary = changeSummary(details['description'])
@@ -61,11 +62,21 @@ def _usage():
 
 def main():
     includeFiles = False
-    if sys.argv[1] == '-f':
-        includeFiles = True
-        fileFilters = sys.argv[2:]
-    else:
-        fileFilters = sys.argv[1:]
+
+    try:
+        opts, fileFilters = getopt.getopt(sys.argv[1:], 'f')
+    except getopt.GetoptError, e:
+        print str(e)
+        _usage()
+        sys.exit(2)
+
+    for o,v in opts:
+        if o in ('-f'):
+            includeFiles = True
+
+    if len(fileFilters) == 0:
+        _usage()
+        sys.exit(2)
 
     p4 = p4lib.P4()
     changes = p4.changes(files=fileFilters)
