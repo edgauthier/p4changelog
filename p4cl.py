@@ -26,13 +26,13 @@ def fileMatchesFilter(f,fileFilters):
         if '*' in fileFilter: return True
         if '?' in fileFilter: return True
 
-        # if the ... wildard is found anywhere but the end, assume all files
-        # match
-        if fileFilter.find('...') != len(fileFilter) - 3: return True
-
         # get rid of any range (date/changelist) specifiers
         if '@' in fileFilter:
             fileFilter = fileFilter.split('@')[0]
+
+        # if the ... wildard is found anywhere but the end, assume all files
+        # match
+        if fileFilter.find('...') != len(fileFilter) - 3: return True
 
         # if it ends in a directory wildcard, it's a match if f starts with the
         # filter (minus the ...)
