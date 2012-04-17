@@ -37,10 +37,10 @@ def fileMatchesFilter(f,fileFilters):
         # if it ends in a directory wildcard, it's a match if f starts with the
         # filter (minus the ...)
         if fileFilter[-3:] == '...':
-            if f.find(fileFilter[:-3]) == 0: return True
+            if f.lower().find(fileFilter[:-3].lower()) == 0: return True
         else:
             # must be a specific file, which means an exact match
-            if f == fileFilter: return True
+            if f.lower() == fileFilter.lower(): return True
 
     return False
 
