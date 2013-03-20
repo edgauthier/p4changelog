@@ -694,7 +694,7 @@ class P4:
             diffsIdx = lines.index("Differences ...\n")
         desc['files'] = []
         fileRe = re.compile('^... (?P<depotFile>.+?)#(?P<rev>\d+) '\
-                            '(?P<action>\w+)$')
+                            '(?P<action>.+)$')
         for line in lines[filesIdx+2:diffsIdx-1]:
             file = fileRe.match(line).groupdict()
             file['rev'] = int(file['rev'])
